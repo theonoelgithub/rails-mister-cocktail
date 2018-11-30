@@ -27,7 +27,7 @@ p "#{Type.count} types chargés"
 
 p 'on attaque les cocktails maintenant'
 
-100.times do
+50.times do
   url = 'https://www.thecocktaildb.com/api/json/v1/1/random.php'
   result = JSON.parse(open(url).read)['drinks'][0]
   # p result
