@@ -19,15 +19,22 @@ JSON.parse(ingredients)['drinks'].each do |hash|
 end
 p "et c'est fini, #{Ingredient.count} ingrédients chargés"
 
+p "on crée les types de cocktail"
+["Alcoholic", "Non alcoholic", "Optional alcohol"].each do |type|
+  Type.create!(name: type)
+end
+p "#{Type.count} types chargés"
+
 p 'on attaque les cocktails maintenant'
 
-100.times do
+200.times do
   url = 'https://www.thecocktaildb.com/api/json/v1/1/random.php'
   result = JSON.parse(open(url).read)['drinks'][0]
   # p result
   # p result['strDrink'].strip.downcase.capitalize
   if Cocktail.find_by(name: result['strDrink'].strip.downcase.capitalize).nil?
-    cocktail_new = Cocktail.new(name: result['strDrink'].strip.downcase.capitalize, image_url: result['strDrinkThumb'])
+    type = Type.find_by(name: result['strAlcoholic'])
+    cocktail_new = Cocktail.new(name: result['strDrink'].strip.downcase.capitalize, image_url: result['strDrinkThumb'], type: type)
     cocktail_new.save!
     i = 1
     ingredient = result["strIngredient#{i}"].strip.chomp.downcase.capitalize

@@ -6,6 +6,7 @@
     <div class="col-xs-6 col-sm-4 col-sm-offset-2">
       <div class="cocktail-content">
         <h1><%= @cocktail.name %></h1>
+        <p><%= @cocktail.type.name %></p>
         <ul>
           <% @cocktail.doses.each do |dose| %>
             <li>
@@ -20,7 +21,7 @@
     </div>
     <div class="col-xs-6 col-sm-4"">
       <div class="newdose-form">
-        <%= render 'doses/formdose', dose: [@cocktail, @dose] %>
+        <%= render 'doses/formdose', dose: @dose, cocktail: @cocktail %>
       </div>
     </div>
   </div>
@@ -33,7 +34,7 @@
 
   </div>
   <div class="newreview-form">
-    <%= render 'reviews/form_review', review: [@cocktail, @review] %>
+    <%= render 'reviews/form_review', review: @review, cocktail: @cocktail %>
   </div>
 
   <ul>
