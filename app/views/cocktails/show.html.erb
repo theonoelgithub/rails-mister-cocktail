@@ -5,9 +5,11 @@
   <%= @cocktail.type.name == "Alcoholic" ? image_tag("alcohol.png", class: "cocktail-type") : image_tag("pregnant.png", class: "cocktail-type") %>
   <div class="row text-center">
       <h1><%= @cocktail.name %></h1>
-      <div class="cocktail-instructions">
-        <p><em>Type:</em> <%= @cocktail.type.name %></p>
-        <p><strong>Instructions:</strong> <%= @cocktail.instructions%></p>
+      <div class="col-xs-10 col-xs-offset-1">
+        <div class="cocktail-instructions">
+          <p><em>Type:</em> <%= @cocktail.type.name %></p>
+          <p><strong>Instructions:</strong> <%= @cocktail.instructions%></p>
+        </div>
       </div>
   </div>
   <hr>
