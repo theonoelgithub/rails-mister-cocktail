@@ -2,11 +2,19 @@
 
 
 <div class="container cocktail-container">
+  <%= @cocktail.type.name == "Alcoholic" ? image_tag("alcohol.png", class: "cocktail-type") : image_tag("pregnant.png", class: "cocktail-type") %>
+  <div class="row text-center">
+      <h1><%= @cocktail.name %></h1>
+      <div class="cocktail-instructions">
+        <p><em>Type:</em> <%= @cocktail.type.name %></p>
+        <p><strong>Instructions:</strong> <%= @cocktail.instructions%></p>
+      </div>
+  </div>
+  <hr>
   <div class="row">
     <div class="col-xs-6 col-sm-4 col-sm-offset-2">
       <div class="cocktail-content">
-        <h1><%= @cocktail.name %></h1>
-        <p><%= @cocktail.type.name %></p>
+        <p><em>Doses:</em></p>
         <ul>
           <% @cocktail.doses.each do |dose| %>
             <li>

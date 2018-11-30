@@ -1,6 +1,7 @@
 <%= simple_form_for cocktail do |f| %>
   <%= f.input :name %>
   <%= f.association :type, input_html: { class: "select2" } %>
+  <%= f.input :instructions %>
   <%= f.input :image_url %>
   <%= f.button :submit %>
 <% end %>
