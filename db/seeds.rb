@@ -7,27 +7,27 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'open-uri'
 
-p "on nettoie les ingrédients parce que l'hygiene c'est important"
-Ingredient.destroy_all
+# p "on nettoie les ingrédients parce que l'hygiene c'est important"
+# Ingredient.destroy_all
 
-p "et c'est parti pour le seed"
-url = "https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list"
+# p "et c'est parti pour le seed"
+# url = "https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list"
 
-ingredients = open(url).read
-JSON.parse(ingredients)['drinks'].each do |hash|
-  Ingredient.create!(name: hash["strIngredient1"].downcase.capitalize)
-end
-p "et c'est fini, #{Ingredient.count} ingrédients chargés"
+# ingredients = open(url).read
+# JSON.parse(ingredients)['drinks'].each do |hash|
+#   Ingredient.create!(name: hash["strIngredient1"].downcase.capitalize)
+# end
+# p "et c'est fini, #{Ingredient.count} ingrédients chargés"
 
-p "on crée les types de cocktail"
-["Alcoholic", "Non alcoholic", "Optional alcohol"].each do |type|
-  Type.create!(name: type)
-end
-p "#{Type.count} types chargés"
+# p "on crée les types de cocktail"
+# ["Alcoholic", "Non alcoholic", "Optional alcohol"].each do |type|
+#   Type.create!(name: type)
+# end
+# p "#{Type.count} types chargés"
 
 p 'on attaque les cocktails maintenant'
 
-50.times do
+100.times do
   url = 'https://www.thecocktaildb.com/api/json/v1/1/random.php'
   result = JSON.parse(open(url).read)['drinks'][0]
   # p result
@@ -35,7 +35,8 @@ p 'on attaque les cocktails maintenant'
   if Cocktail.find_by(name: result['strDrink'].strip.downcase.capitalize).nil?
     type = Type.find_by(name: result['strAlcoholic'])
     instructions = result["strInstructions"]
-    cocktail_new = Cocktail.new(name: result['strDrink'].strip.downcase.capitalize, image_url: result['strDrinkThumb'], type: type, instructions: instructions)
+    cocktail_new = Cocktail.new(name: result['strDrink'].strip.downcase.capitalize, type: type, instructions: instructions)
+    cocktail_new.remote_image_url = result['strDrinkThumb']
     cocktail_new.save!
     i = 1
     ingredient = result["strIngredient#{i}"].strip.chomp.downcase.capitalize

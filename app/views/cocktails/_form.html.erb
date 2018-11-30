@@ -1,7 +1,8 @@
 <%= simple_form_for cocktail do |f| %>
   <%= f.input :name %>
-  <%= f.association :type, input_html: { class: "select2" } %>
+  <%= f.association :type %>
   <%= f.input :instructions %>
-  <%= f.input :image_url %>
+  <%= f.input :image %>
+  <%= f.input :image_cache, as: :hidden %>
   <%= f.button :submit %>
 <% end %>
