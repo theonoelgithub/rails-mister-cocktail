@@ -31,7 +31,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  .search-form {
+    margin-right: 5px;
+  }
 }
+
+
 
 /* Basic navbar item */
 .navbar-wagon-item {
