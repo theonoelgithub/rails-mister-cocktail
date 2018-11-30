@@ -24,6 +24,25 @@
       </div>
     </div>
   </div>
+</div>
 
+<div class="container review-container">
+  <div class="review-average-rating">
+    <p>Average rating: <%= @cocktail.reviews.average(:rating).nil? ? "not yet rated" : "#{@cocktail.reviews.average(:rating)}/5" %></p>
+    <p>Number of reviews : <%= @cocktail.reviews.size %></p>
+
+  </div>
+  <div class="newreview-form">
+    <%= render 'reviews/form_review', review: [@cocktail, @review] %>
+  </div>
+
+  <ul>
+    <% @cocktail.reviews.each do |review| %>
+    <li>
+      <%= review.rating %> /5 : <%= review.content %>
+    </li>
+    <% end %>
+  </ul>
 
 </div>
+

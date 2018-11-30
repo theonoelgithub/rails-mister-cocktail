@@ -8,6 +8,7 @@
   border-radius: 3px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   margin-bottom: 20px;
+  transition: all 0.3s ease;
 }
 .card-user {
   position: absolute;
@@ -46,6 +47,7 @@
   background: black;
   opacity: 0;
 }
+
 .card-link:hover {
   opacity: 0.1;
 }

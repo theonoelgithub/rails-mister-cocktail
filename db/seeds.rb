@@ -21,9 +21,11 @@ p "et c'est fini, #{Ingredient.count} ingrédients chargés"
 
 p 'on attaque les cocktails maintenant'
 
-40.times do
+100.times do
   url = 'https://www.thecocktaildb.com/api/json/v1/1/random.php'
   result = JSON.parse(open(url).read)['drinks'][0]
+  # p result
+  # p result['strDrink'].strip.downcase.capitalize
   if Cocktail.find_by(name: result['strDrink'].strip.downcase.capitalize).nil?
     cocktail_new = Cocktail.new(name: result['strDrink'].strip.downcase.capitalize, image_url: result['strDrinkThumb'])
     cocktail_new.save!
@@ -37,9 +39,9 @@ p 'on attaque les cocktails maintenant'
       else
         description_new = result["strMeasure#{i}"]
       end
-      Dose.create!(description: description_new, cocktail: cocktail_new, ingredient: new_ingr)
+      Dose.create(description: description_new, cocktail: cocktail_new, ingredient: new_ingr)
       i += 1
-      ingredient = result["strIngredient#{i}"].strip.chomp.downcase.capitalize
+      result["strIngredient#{i}"].nil? ? ingredient = "" : ingredient = result["strIngredient#{i}"].strip.chomp.downcase.capitalize
     end
   end
   next
